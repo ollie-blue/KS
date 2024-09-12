@@ -34,4 +34,4 @@ with open ('car_maintenance_cost.json', 'w') as f:
 
 
 # if __name__ == '__main__':
-#     pass    
+#     print(car_maintenance_cost(url))    

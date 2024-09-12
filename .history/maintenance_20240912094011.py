@@ -33,5 +33,5 @@ with open ('car_maintenance_cost.json', 'w') as f:
     f.write(export_data)
 
 
-# if __name__ == '__main__':
-#     pass    
+if __name__ == '__main__':
+    print(car_maintenance_cost(url))    
