@@ -47,8 +47,7 @@ for i in range(n):
 print("Here is the comparison of all cars: ")
 for key, value in total_cost.items():
     print(key.capitalize(), ': $', value)
-print('The most economical car based on monthly payments is: ', min(total_cost, key=total_cost.get).capitalize())
-
+print('The most economical car based on monthly payments is: ', min(total_cost, key=total_cost.get)).capitalize()
 
     
     
