@@ -23,6 +23,9 @@ for row in rows:
          'cost': cols[2].text.replace('$', '').replace(',', '')   
     }
 )
+    
+
+print()
 
 car_maintenance_cost = {key['brand']: key['cost'] for key in car_maintenance_cost}
 
@@ -36,5 +39,6 @@ with open ('car_maintenance_cost.json', 'w') as f:
     f.write(export_data)
 
 
-
+# car_maintenance_cost = {key.capitalize(): value for key, value in car_maintenance_cost.items()}
+# print(car_maintenance_cost)
 

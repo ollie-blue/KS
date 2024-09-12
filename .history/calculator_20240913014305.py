@@ -1,0 +1,88 @@
+from gas_scrap import * 
+from carmaintenance import car_maintenance_cost
+
+
+class Car:  
+    def __init__(self, brand, price, down_payment, interest_rate, loan_term):  
+        self.brand = brand  
+        self.price = price  
+        self.down_payment = down_payment  
+        self.interest_rate = interest_rate    
+        self.loan_term = loan_term  # In years  
+
+    
+    def get_gas_prices():
+        '''Retrieves the current gas price for a given state'''
+        url = 'https://gasprices.aaa.com/state-gas-price-averages/'
+        gas_price = scrap_gas(url)
+        user_state = input("Enter your state: ").capitalize()
+        if user_state in gas_price:
+            state_prices = gas_price[user_state]
+            return state_prices
+    
+    
+    def get_user_mileage(miles_city_month, miles_highway_month): 
+        '''Calculates the miles driven in a month'''
+        miles_city_weekdays = float(input("Enter miles driven in the city on weekdays: "))
+        miles_city_weekends = float(input("Enter miles driven in the city on weekends: "))
+        miles_highway_weekdays = float(input("Enter miles driven on highway on weekdays: "))
+        miles_highway_weekends = float(input("Enter miles driven on highway on weekends: "))
+        miles_city_month = (miles_city_weekdays*5) + (miles_city_weekends*2)*52/12
+        miles_highway_month = (miles_highway_weekdays*5) + (miles_highway_weekends*2)*52/12
+        total_miles_month = miles_city_month + miles_highway_month
+        print(f"Your total mileage per month is {total_miles_month}")
+       
+       
+    def get_car_mileage(miles_city_month, miles_highway_month, state_prices):
+        city_mileage = float(input("Enter car miles driven in the city: "))
+        highway_mileage = float(input("Enter car miles driven on the highway: "))
+        fuel_type = input("Enter fuel type (Premium/Midgrade/Regular/Diesel): ").capitalize()
+        if fuel_type in state_prices:
+            cost_per_gallon = float(state_prices[fuel_type])
+        total_gas_cost = cost_per_gallon * ((miles_city_month/city_mileage) + (miles_highway_month/highway_mileage)) 
+        return total_gas_cost
+    
+    
+    def get_monthly_maintenance_cost(brand):
+        '''Calculates monthly maintenance cost'''
+        return car_maintenance_cost[brand]  
+    
+    
+    def get_monthly_interest_rate():
+        '''Calculates monthly interest rate'''
+        principal = float(input("Enter loan amount: "))
+        interest_rate = float(input("Enter interest rate per year: "))
+        loan_term = float(input("Enter loan term in years: "))
+        down_payment = float(input("Enter down payment: "))
+        sales_tax_rate = float(input("Enter sales tax rate: "))
+        amount_owed = principal + ((principal * sales_tax_rate)/100)
+        amount_owed = amount_owed - down_payment
+        monthly_interest_rate = interest_rate/12/100
+        # calculate monthly payment
+        if monthly_interest_rate == 0:
+            monthly_payment = amount_owed / loan_term * 12
+        else:
+            monthly_payment = (amount_owed * monthly_interest_rate) / (1 - (1 + monthly_interest_rate) ** -loan_term)
+        return monthly_payment
+            
+    
+    def calculate_loan_amount(self):  
+        '''Calculates the loan amount after down payment.'''  
+        return self.price - self.down_payment  
+    
+
+    def display_loan_summary(self):  
+        '''Returns a summary of the loan details.'''
+        monthly_payment = self.calculate_monthly_payment()  
+        total_payment = monthly_payment * self.loan_term * 12  
+        total_interest = total_payment - self.calculate_loan_amount()  
+        
+        summary = {  
+            'brand': self.brand,  
+            'monthly_payment': monthly_payment,  
+            'total_payment': total_payment,  
+            'total_interest': total_interest  
+        }  
+        return summary  
+
+
