@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 import json
-import pprint
 
 url = 'https://caredge.com/ranks/maintenance'
 
@@ -24,9 +23,9 @@ for row in rows:
         'cost': int(cols[2].text.replace('$', '').replace(',', ''))
         }
     )
-
-        
-pprint.pprint(car_maintenance_cost)
+    
+    
+print(car_maintenance_cost)
 
 export_data = json.dumps(car_maintenance_cost)
 
@@ -34,6 +33,6 @@ with open ('car_maintenance_cost.json', 'w') as f:
     f.write(export_data)
 
 
-# car_maintenance_cost = {key.capitalize(): value for key, value in car_maintenance_cost.items()}
-# print(car_maintenance_cost)
+car_maintenance_cost = {key.capitalize(): value for key, value in car_maintenance_cost.items()}
+print(car_maintenance_cost)
 

@@ -15,7 +15,7 @@ tbody = table.tbody
 
 rows = tbody.find_all('tr')
 
-car_maintenance_cost = []
+car_maintenance_cost = {}
 for row in rows:
     cols = row.find_all('td')
     car_maintenance_cost.append(
@@ -24,8 +24,7 @@ for row in rows:
         'cost': int(cols[2].text.replace('$', '').replace(',', ''))
         }
     )
-
-        
+    
 pprint.pprint(car_maintenance_cost)
 
 export_data = json.dumps(car_maintenance_cost)

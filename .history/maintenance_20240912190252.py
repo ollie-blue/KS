@@ -25,6 +25,10 @@ for row in rows:
         }
     )
 
+for key in list(car_maintenance_cost.keys()):
+    if key == 'brand':
+        del car_maintenance_cost[key]
+    
         
 pprint.pprint(car_maintenance_cost)
 

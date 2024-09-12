@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import json
-import pprint
+from pprint import pprint
 
 url = 'https://caredge.com/ranks/maintenance'
 
@@ -24,9 +24,8 @@ for row in rows:
         'cost': int(cols[2].text.replace('$', '').replace(',', ''))
         }
     )
-
-        
-pprint.pprint(car_maintenance_cost)
+    
+print(car_maintenance_cost)
 
 export_data = json.dumps(car_maintenance_cost)
 

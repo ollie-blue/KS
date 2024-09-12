@@ -34,6 +34,6 @@ with open ('car_maintenance_cost.json', 'w') as f:
     f.write(export_data)
 
 
-# car_maintenance_cost = {key.capitalize(): value for key, value in car_maintenance_cost.items()}
-# print(car_maintenance_cost)
+car_maintenance_cost = {key.capitalize(): value for key, value in car_maintenance_cost.items()}
+print(car_maintenance_cost)
 

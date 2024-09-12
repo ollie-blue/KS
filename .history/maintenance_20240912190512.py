@@ -25,6 +25,7 @@ for row in rows:
         }
     )
 
+    
         
 pprint.pprint(car_maintenance_cost)
 
